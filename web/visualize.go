@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/mitroadmaps/gomapinfer/common"
-	"github.com/mitroadmaps/gomapinfer/image"
+	"github.com/apperception-db/gomapinfer/common"
+	"github.com/apperception-db/gomapinfer/image"
 
 	"encoding/json"
 	"io/ioutil"

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/mitroadmaps/gomapinfer/common"
+	"github.com/apperception-db/gomapinfer/common"
 	goslgraph "./munkres"
 
 	"encoding/json"
