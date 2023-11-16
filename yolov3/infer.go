@@ -3,7 +3,7 @@ package main
 // modified from skyql-subsystem/run-yolo.go
 
 import (
-	"github.com/mitroadmaps/gomapinfer/common"
+	"github.com/apperception-db/gomapinfer/common"
 
 	"bufio"
 	"encoding/json"
@@ -68,7 +68,7 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
-			fmt.Println("[yolo] [stdout] " + strings.TrimSpace(line))
+			// fmt.Println("[yolo] [stdout] " + strings.TrimSpace(line))
 			output += line
 			if strings.Contains(line, "Enter") {
 				break
@@ -85,8 +85,11 @@ func main() {
 			//parts := strings.Split(lines[i], ": ")
 			//box.Class = parts[0]
 			//box.Confidence, _ = strconv.Atoi(strings.Trim(parts[1], "%"))
-			for !strings.Contains(lines[i], "Bounding Box:") {
+			for i < len(lines) && !strings.Contains(lines[i], "Bounding Box:") {
 				i++
+			}
+			if i >= len(lines) {
+				continue
 			}
 			parts := strings.Split(strings.Split(lines[i], ": ")[1], ", ")
 			if len(parts) != 4 {

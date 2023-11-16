@@ -12,11 +12,10 @@ Setup
 -----
 
 First, download the SkyQuery dataset. In the commands below, we will assume it
-is in /data/:
+is in ./data/:
 
 	wget https://favyen.com/files/skyquery-dataset.zip
 	unzip skyquery-dataset.zip
-	mv data/ /data/
 
 Install Python dependencies:
 
@@ -28,6 +27,8 @@ pedestrian detector, respectively:
 	cd /path/to/skyquery3
 	git clone https://github.com/pjreddie/darknet
 	cd darknet
+If using CUDA, change the variable `GPU=0` in `Makefile` to `GPU=1`. You might also need to modify the variable `ARCH` to include only supported architectures; then:
+
 	make
 
 
@@ -38,8 +39,8 @@ We now need to register object detection models with the SkyQuery web platform,
 which we will run in a later step. This will save metadata about the models to
 /data/detect/X.json.
 
-	python detector/register.py pedestrians /data/data/ /data/pedestrian-model/model 1
-	python yolov3/register.py cars /data/data/ /data/car-model/yolov3.cfg /data/car-model/yolov3.best
+	python detector/register.py pedestrians ./data/data/ ./data/pedestrian-model/model 1
+	python yolov3/register.py cars ./data/data/ ./data/car-model/yolov3.cfg ./data/car-model/yolov3.best
 
 
 Frame Alignment
@@ -49,7 +50,7 @@ Run the frame alignment script. This will input video from /data/frames/main/
 along with GPS data from /data/data/align-gps.json, and produce a file
 describing the bounds of each frame in /data/data/align-out.json.
 
-	python preprocess_fast/main.py /data/frames/main/ /data/data/ 2
+	python preprocess_fast/main.py ./data/frames/main/ ./data/data/ 2
 
 
 Web Platform
@@ -61,8 +62,8 @@ Now we can run the web platform. Install Go if needed:
 
 And then (note: we use Go 1.13, for newer version you may need to disable Go modules):
 
-	go get github.com/mitroadmaps/gomapinfer/common
-	go run ./web/ /data/data/ /data/frames/main/
+	go get github.com/apperception-db/gomapinfer/common
+	go run ./web/ ./data/data/ ./data/frames/main/
 
 You can now run the example programs in programs/ folder using the web
 interface (http://localhost:8080/).
