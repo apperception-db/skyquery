@@ -12,7 +12,7 @@ import (
 func main() {
 	Config.DataDir = os.Args[1]
 	Config.VideoDir = os.Args[2]
-	Config.Python = "python3.6"
+	Config.Python = "/data/chanwutk/.local/share/mambaforge/envs/skyquery/bin/python"
 
 	var mu sync.Mutex
 	var running bool

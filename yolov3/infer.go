@@ -85,12 +85,10 @@ func main() {
 			//parts := strings.Split(lines[i], ": ")
 			//box.Class = parts[0]
 			//box.Confidence, _ = strconv.Atoi(strings.Trim(parts[1], "%"))
-			for i < len(lines) && !strings.Contains(lines[i], "Bounding Box:") {
+			for !strings.Contains(lines[i], "Bounding Box:") {
 				i++
 			}
-			if i >= len(lines) {
-				continue
-			}
+			fmt.Println(lines[i])
 			parts := strings.Split(strings.Split(lines[i], ": ")[1], ", ")
 			if len(parts) != 4 {
 				panic(fmt.Errorf("bad bbox line %s", lines[i]))

@@ -171,13 +171,23 @@ func ToMatrixOp(args []OpArgument, outDir string) error {
 		IgnoreZero bool
 		UnionSeqs bool
 	}
+	operands.IgnoreZero = false
+	operands.UnionSeqs = false
 	err := json.Unmarshal([]byte(args[1].String), &operands)
+	fmt.Println(args[1].String)
 	if err != nil {
-		return fmt.Errorf("error decoding operands %s: %v", args[1].String, err)
+		return nil
+		// return fmt.Errorf("error decoding operands %s: %v", args[1].String, err)
 	}
-	if operands.Func == "" {
-		operands.Func = "count"
+
+	operands.GridSize, err = strconv.Atoi(args[2].String)
+	if err != nil {
+		return fmt.Errorf("error decoding operands %s: %v", args[2].String, err)
 	}
+	// if operands.Func == "" {
+	// 	operands.Func = "count"
+	// }
+	operands.Func = args[1].String
 	if operands.GridSize == 0 {
 		operands.GridSize = 32
 	}
