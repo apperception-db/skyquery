@@ -1,0 +1,7 @@
+cars = Detect("car_model")
+car_traj = Track(cars;"iou")
+
+cycling_lanes = Import("cycling-lanes.png")
+stopped = Select(car_traj;"displacement < 3")
+stopped = Select(stopped;"duration > 5")
+hazards = Join(stopped;cycling_lanes)

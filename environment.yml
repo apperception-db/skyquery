@@ -1,0 +1,8 @@
+name: skyquery
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python=3.12
+  - poetry=1.5.1
